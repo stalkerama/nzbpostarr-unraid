@@ -3,6 +3,7 @@ FROM python:3.12-slim-bookworm
 ARG UPSTREAM_REPO=https://github.com/polyn0mial/NZBPostarr.git
 ARG UPSTREAM_REF=main
 ARG NYUU_VERSION=0.4.2
+ARG PARPAR_VERSION=0.4.5
 ARG RAR_VERSION=723
 
 LABEL org.opencontainers.image.title="NZBPostarr for Unraid" \
@@ -30,18 +31,22 @@ RUN apt-get update \
         xz-utils \
     && rm -rf /var/lib/apt/lists/*
 
-# Nyuu's official Linux release also contains the ParPar binary used by NZBPostarr.
+# Install the official Nyuu Linux binary.
 RUN set -eux; \
     curl -fsSL "https://github.com/animetosho/Nyuu/releases/download/v${NYUU_VERSION}/nyuu-v${NYUU_VERSION}-linux-amd64.tar.xz" -o /tmp/nyuu.tar.xz; \
     mkdir -p /tmp/nyuu; \
     tar -xJf /tmp/nyuu.tar.xz -C /tmp/nyuu; \
     NYUU_BIN="$(find /tmp/nyuu -type f -name nyuu -print -quit)"; \
-    PARPAR_BIN="$(find /tmp/nyuu -type f -name parpar -print -quit)"; \
     test -n "$NYUU_BIN"; \
-    test -n "$PARPAR_BIN"; \
     install -m 0755 "$NYUU_BIN" /usr/local/bin/nyuu; \
-    install -m 0755 "$PARPAR_BIN" /usr/local/bin/parpar; \
     rm -rf /tmp/nyuu /tmp/nyuu.tar.xz
+
+# Install the official static ParPar Linux binary.
+RUN set -eux; \
+    curl -fsSL "https://github.com/animetosho/ParPar/releases/download/v${PARPAR_VERSION}/parpar-v${PARPAR_VERSION}-linux-static-amd64.xz" -o /tmp/parpar.xz; \
+    xz -dc /tmp/parpar.xz > /usr/local/bin/parpar; \
+    chmod 0755 /usr/local/bin/parpar; \
+    rm -f /tmp/parpar.xz
 
 # RAR is required by NZBPostarr to create split RAR archives.
 RUN set -eux; \
