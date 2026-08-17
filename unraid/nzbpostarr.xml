@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>NZBPostarr</Name>
+  <Repository>ghcr.io/stalkerama/nzbpostarr-unraid:latest</Repository>
+  <Registry>https://github.com/stalkerama/nzbpostarr-unraid/pkgs/container/nzbpostarr-unraid</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/stalkerama/nzbpostarr-unraid/issues</Support>
+  <Project>https://github.com/polyn0mial/NZBPostarr</Project>
+  <Overview>Unraid/Docker packaging for the original NZBPostarr project. This container does not patch or modify NZBPostarr application source. It adds only the dependencies and container configuration needed to run the upstream application on Unraid.</Overview>
+  <Category>Downloaders:</Category>
+  <WebUI>http://[IP]:[PORT:8000]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/stalkerama/nzbpostarr-unraid/main/unraid/nzbpostarr.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/polyn0mial/NZBPostarr/main/webui/assets/images/logo.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled>0</DateInstalled>
+  <DonateText/>
+  <DonateLink/>
+  <Requires/>
+  <Config Name="WebUI Port" Target="8000" Default="8000" Mode="tcp" Description="NZBPostarr WebUI container port." Type="Port" Display="always" Required="true" Mask="false">8000</Config>
+  <Config Name="Appdata" Target="/config" Default="/mnt/user/appdata/nzbpostarr" Mode="rw" Description="Persistent NZBPostarr configuration, history, generated NZBs, and runtime state." Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/nzbpostarr</Config>
+  <Config Name="Data" Target="/data" Default="" Mode="rw" Description="Choose the Unraid host path containing the files NZBPostarr should access. Inside NZBPostarr this path is /data." Type="Path" Display="always" Required="true" Mask="false"></Config>
+  <Config Name="PUID" Target="PUID" Default="99" Mode="" Description="User ID used to run NZBPostarr. 99 is the standard Unraid nobody UID." Type="Variable" Display="advanced" Required="true" Mask="false">99</Config>
+  <Config Name="PGID" Target="PGID" Default="100" Mode="" Description="Group ID used to run NZBPostarr. 100 is the standard Unraid users GID." Type="Variable" Display="advanced" Required="true" Mask="false">100</Config>
+</Container>
