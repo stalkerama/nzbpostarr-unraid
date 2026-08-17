@@ -8,7 +8,8 @@ ARG RAR_VERSION=723
 LABEL org.opencontainers.image.title="NZBPostarr for Unraid" \
       org.opencontainers.image.description="Unraid/Docker packaging for the unmodified upstream NZBPostarr project" \
       org.opencontainers.image.source="https://github.com/stalkerama/nzbpostarr-unraid" \
-      org.opencontainers.image.url="https://github.com/polyn0mial/NZBPostarr"
+      org.opencontainers.image.url="https://github.com/polyn0mial/NZBPostarr" \
+      org.opencontainers.image.licenses="MIT"
 
 ENV DEBIAN_FRONTEND=noninteractive \
     PYTHONUNBUFFERED=1 \
